@@ -14,8 +14,8 @@ import {
 import WalletConnect from '../Button/WalletConnect'
 import { useAccount, useTransactionReceipt } from '@starknet-react/core'
 import useBuyMeCoffee from '../../hooks/useBuyMeCoffee'
-import useAllowance from '../../hooks/useAllowance'
-import useApprove from '../../hooks/useApprove'
+// import useAllowance from '../../hooks/useAllowance'
+// import useApprove from '../../hooks/useApprove'
 import { toast } from 'react-toastify'
 import { getReceipt } from '../../utils/helpers'
 import { useEvents } from '../../contexts/Events/hooks'
@@ -25,9 +25,9 @@ const CoffeeForm: React.FC = () => {
   const { events: allEvents, onSetEvents } = useEvents()
   const [selectedPrice, setSelectedPrice] = React.useState<string>('0.001')
   const [events, setEvents] = useState<any>()
-  const isApproved = useAllowance()
+  // const isApproved = useAllowance()
   const toastId = useRef<number | string>(0)
-  const { onApprove, approveData } = useApprove()
+  // const { onApprove, approveData } = useApprove()
   const handleOptionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedPrice((event.target as HTMLInputElement).value)
   }
@@ -45,10 +45,10 @@ const CoffeeForm: React.FC = () => {
     hash: buyMeCoffeeData?.transaction_hash,
     watch: true,
   })
-  const { data: approveReceipt } = useTransactionReceipt({
-    hash: approveData?.transaction_hash,
-    watch: true,
-  })
+  // const { data: approveReceipt } = useTransactionReceipt({
+  //   hash: approveData?.transaction_hash,
+  //   watch: true,
+  // })
 
   useEffect(() => {
     if (transactionReceipt?.status === 'ACCEPTED_ON_L2') {
@@ -81,28 +81,28 @@ const CoffeeForm: React.FC = () => {
     reset,
   ])
 
-  useEffect(() => {
-    if (approveReceipt?.status === 'RECEIVED') {
-      toastId.current = toast.loading('Approving the contract...')
-    } else if (approveReceipt?.status === 'ACCEPTED_ON_L2') {
-      toast.update(toastId.current, {
-        render: 'Contract is approved',
-        type: 'success',
-        autoClose: 5000,
-        isLoading: false,
-      })
-    }
-  }, [approveReceipt])
+  // useEffect(() => {
+  //   if (approveReceipt?.status === 'RECEIVED') {
+  //     toastId.current = toast.loading('Approving the contract...')
+  //   } else if (approveReceipt?.status === 'ACCEPTED_ON_L2') {
+  //     toast.update(toastId.current, {
+  //       render: 'Contract is approved',
+  //       type: 'success',
+  //       autoClose: 5000,
+  //       isLoading: false,
+  //     })
+  //   }
+  // }, [approveReceipt])
 
   const submitForm = () => {
     buyMeCoffee()
   }
 
-  const disabledSubmitButton = !(
-    isApproved ||
-    approveReceipt?.status === 'ACCEPTED_ON_L2' ||
-    approveReceipt?.status === 'ACCEPTED_ON_L1'
-  )
+  // const disabledSubmitButton = !(
+  //   isApproved ||
+  //   approveReceipt?.status === 'ACCEPTED_ON_L2' ||
+  //   approveReceipt?.status === 'ACCEPTED_ON_L1'
+  // )
 
   return (
     <Box
@@ -217,7 +217,7 @@ const CoffeeForm: React.FC = () => {
       >
         {status === 'connected' && address ? (
           <Stack flexDirection="row">
-            <Button
+            {/* <Button
               variant="contained"
               sx={{ marginRight: '10px' }}
               disabled={
@@ -226,12 +226,8 @@ const CoffeeForm: React.FC = () => {
               onClick={() => onApprove()}
             >
               Approve
-            </Button>
-            <Button
-              type="submit"
-              variant="contained"
-              disabled={disabledSubmitButton}
-            >
+            </Button> */}
+            <Button type="submit" variant="contained">
               Submit
             </Button>
           </Stack>
