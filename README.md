@@ -9,7 +9,7 @@ To run the website locally, you need to have:
 
 ### Clone the repo:
 ```
-git clone https://github.com/itachi-eth/buy-me-a-coffee.git
+git clone https://github.com/starknet-edu/buymeacoffee-ui
 ```
 Here are the changes we need to make before running the code locally:
 
