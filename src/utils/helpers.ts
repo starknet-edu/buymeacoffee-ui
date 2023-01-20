@@ -45,7 +45,7 @@ export const chunkSubstr = (str: string, size: number) => {
 
 export const getReceipt = (events: any) => {
   if (Array.isArray(events)) {
-    const receiptsData = events[1]['data']
+    const receiptsData = events[2]['data']
     const accounts = receiptsData[0]
     const name = feltToString(receiptsData[1])
     const messagesLen = Number(feltToString(receiptsData[2]))
